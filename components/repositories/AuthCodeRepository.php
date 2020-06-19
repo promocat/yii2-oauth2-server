@@ -6,14 +6,14 @@
  * Time: 16:21
  */
 
-namespace promocat\oauth2\components\repositories;
+namespace NIOLAB\oauth2\components\repositories;
 
 
 use frontend\models\Auth;
 use League\OAuth2\Server\Entities\AuthCodeEntityInterface;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
-use promocat\oauth2\models\AuthCode;
-use promocat\oauth2\models\Scope;
+use NIOLAB\oauth2\models\AuthCode;
+use NIOLAB\oauth2\models\Scope;
 
 class AuthCodeRepository implements \League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface {
 

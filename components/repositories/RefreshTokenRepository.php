@@ -6,13 +6,13 @@
  * Time: 16:21
  */
 
-namespace promocat\oauth2\components\repositories;
+namespace NIOLAB\oauth2\components\repositories;
 
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
 use League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface;
-use promocat\oauth2\models\RefreshToken;
+use NIOLAB\oauth2\models\RefreshToken;
 
 class RefreshTokenRepository implements RefreshTokenRepositoryInterface {
 

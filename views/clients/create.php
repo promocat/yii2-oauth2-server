@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model promocat\oauth2\models\Client */
+/* @var $model NIOLAB\oauth2\models\Client */
 
 $this->title = 'Create oAuth2 Client';
 $this->params['breadcrumbs'][] = ['label' => 'oAuth2 Clients', 'url' => ['index']];

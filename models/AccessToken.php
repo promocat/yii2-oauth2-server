@@ -8,7 +8,7 @@
  * Client = andere applicatie die connectie maakt met ons als oauth2 server
  */
 
-namespace promocat\oauth2\models;
+namespace NIOLAB\oauth2\models;
 
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;

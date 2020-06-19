@@ -10,7 +10,7 @@
  * Based on original by chervand (Source: https://github.com/chervand/yii2-oauth2-server)
  */
 
-namespace promocat\oauth2\components\web;
+namespace NIOLAB\oauth2\components\web;
 
 use Yii;
 use yii\web\HeaderCollection;

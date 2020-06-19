@@ -1,14 +1,14 @@
 <?php
 
-namespace promocat\oauth2\models;
+namespace NIOLAB\oauth2\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use promocat\oauth2\models\Client;
+use NIOLAB\oauth2\models\Client;
 
 /**
- * ClientSearch represents the model behind the search form of `promocat\oauth2\models\Client`.
+ * ClientSearch represents the model behind the search form of `NIOLAB\oauth2\models\Client`.
  */
 class ClientSearch extends Client
 {

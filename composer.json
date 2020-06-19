@@ -1,5 +1,5 @@
 {
-  "name": "promocat/yii2-oauth2-server",
+  "name": "niolab/yii2-oauth2-server",
   "description": "Oauth2 server",
   "type": "yii2-extension",
   "keywords": [
@@ -8,6 +8,11 @@
   ],
   "license": "MIT",
   "authors": [
+     {
+      "name": "Harry Doddema",
+      "email": "harry@niomail.nl",
+      "role": "Sr. Developer"
+    },
     {
       "name": "Harry Doddema",
       "email": "harrydoddema@promocat.nl",
@@ -21,7 +26,7 @@
   },
   "autoload": {
     "psr-4": {
-      "promocat\\oauth2\\": ""
+      "NIOLAB\\oauth2\\": ""
     }
   }
 }

@@ -6,15 +6,15 @@
  * Time: 16:21
  */
 
-namespace promocat\oauth2\components\repositories;
+namespace NIOLAB\oauth2\components\repositories;
 
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Entities\ScopeEntityInterface;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException;
-use promocat\oauth2\models\AccessToken;
-use promocat\oauth2\models\Scope;
+use NIOLAB\oauth2\models\AccessToken;
+use NIOLAB\oauth2\models\Scope;
 use yii\helpers\Json;
 
 class AccessTokenRepository implements \League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface {

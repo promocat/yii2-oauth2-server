@@ -5,20 +5,20 @@
  * Date: 15-5-2018
  * Time: 16:06
  */
-namespace promocat\oauth2;
+namespace NIOLAB\oauth2;
 
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 use League\OAuth2\Server\Grant\ClientCredentialsGrant;
 use League\OAuth2\Server\Grant\PasswordGrant;
 use League\OAuth2\Server\Grant\RefreshTokenGrant;
-use promocat\oauth2\components\repositories\AuthCodeRepository;
-use promocat\oauth2\components\repositories\RefreshTokenRepository;
-use promocat\oauth2\components\web\ServerRequest;
-use promocat\oauth2\components\web\ServerResponse;
-use promocat\oauth2\components\repositories\AccessTokenRepository;
-use promocat\oauth2\components\repositories\ClientRepository;
-use promocat\oauth2\components\repositories\ScopeRepository;
+use NIOLAB\oauth2\components\repositories\AuthCodeRepository;
+use NIOLAB\oauth2\components\repositories\RefreshTokenRepository;
+use NIOLAB\oauth2\components\web\ServerRequest;
+use NIOLAB\oauth2\components\web\ServerResponse;
+use NIOLAB\oauth2\components\repositories\AccessTokenRepository;
+use NIOLAB\oauth2\components\repositories\ClientRepository;
+use NIOLAB\oauth2\components\repositories\ScopeRepository;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
 
@@ -27,7 +27,7 @@ class Module extends \yii\base\Module {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'promocat\oauth2\controllers';
+    public $controllerNamespace = 'NIOLAB\oauth2\controllers';
 
 
     /**
@@ -49,6 +49,30 @@ class Module extends \yii\base\Module {
      * @var string A random encryption key. For example you could create one with base64_encode(random_bytes(32))
      */
     public $encryptionKey;
+
+    /**
+     * @var bool Enable the Client Credentials Grant (https://oauth2.thephpleague.com/authorization-server/client-credentials-grant/)
+     */
+    public $enableClientCredentialsGrant = true;
+
+    /**
+     * @var bool Enable the Password Grant (https://oauth2.thephpleague.com/authorization-server/resource-owner-password-credentials-grant/)
+     */
+    public $enablePasswordGrant = true;
+
+    /**
+     * @var bool Enable the Authorization Code Grant (https://oauth2.thephpleague.com/authorization-server/auth-code-grant/)
+     */
+    public $enableAuthorizationCodeGrant = true;
+
+    /**
+     * @var bool Enable the Implicit Grant (https://oauth2.thephpleague.com/authorization-server/implicit-grant/
+     */
+    public $enableImplicitGrant = false;
+
+
+    public $enableClientsController = true;
+
 
 //    2018-07-10: Ik krijg dit niet werkend - Harry
 //    /**
@@ -82,34 +106,53 @@ class Module extends \yii\base\Module {
                 $this->encryptionKey
             );
 
+            $enableRefreshGrant = false;
+
             /* Client Credentials Grant */
-            $server->enableGrantType(
-                new ClientCredentialsGrant(),
-                new \DateInterval('PT1H')
-            );
+            if ($this->enableClientCredentialsGrant) {
+                $server->enableGrantType(
+                    new ClientCredentialsGrant(),
+                    new \DateInterval('PT1H')
+                );
+            }
+
+            /* Client Credentials Grant */
+            if ($this->enableImplicitGrant) {
+                $server->enableGrantType(
+                    new ImplicitGrant(new \DateInterval('PT1H')),
+                    new \DateInterval('PT1H')
+                );
+            }
 
             /* Password Grant */
-            $server->enableGrantType(new PasswordGrant(
-                $userRepository,
-                $refreshTokenRepository
-            ));
+            if ($this->enablePasswordGrant) {
+                $server->enableGrantType(new PasswordGrant(
+                    $userRepository,
+                    $refreshTokenRepository
+                ));
+                $enableRefreshGrant = true;
+            }
 
             /* Authorization Code Flow Grant */
-            $grant = new AuthCodeGrant(
-                $authCodeRepository,
-                $refreshTokenRepository,
-                new \DateInterval('P1M')
-            );
-            $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
-            $server->enableGrantType($grant);
-
+            if ($this->enableAuthorizationCodeGrant) {
+                $grant = new AuthCodeGrant(
+                    $authCodeRepository,
+                    $refreshTokenRepository,
+                    new \DateInterval('P1M')
+                );
+                $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
+                $server->enableGrantType($grant);
+                $enableRefreshGrant = true;
+            }
 
             /* Refresh Token Grant */
-            $grant = new RefreshTokenGrant(
-                $refreshTokenRepository
-            );
-            $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
-            $server->enableGrantType($grant);
+            if ($enableRefreshGrant) {
+                $grant = new RefreshTokenGrant(
+                    $refreshTokenRepository
+                );
+                $grant->setRefreshTokenTTL(new \DateInterval('P1M'));
+                $server->enableGrantType($grant);
+            }
 
             $this->set('server',$server);
         }

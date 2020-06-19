@@ -6,10 +6,10 @@
  * Time: 16:21
  */
 
-namespace promocat\oauth2\components\repositories;
+namespace NIOLAB\oauth2\components\repositories;
 
 use League\OAuth2\Server\Entities\ClientEntityInterface;
-use promocat\oauth2\models\Client;
+use NIOLAB\oauth2\models\Client;
 
 class ClientRepository implements \League\OAuth2\Server\Repositories\ClientRepositoryInterface {
 

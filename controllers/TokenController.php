@@ -6,12 +6,12 @@
  * Time: 09:44
  */
 
-namespace promocat\oauth2\controllers;
+namespace NIOLAB\oauth2\controllers;
 
 use League\OAuth2\Server\Exception\OAuthServerException;
-use promocat\oauth2\components\web\OauthHttpException;
-use promocat\oauth2\models\AccessToken;
-use promocat\oauth2\Module;
+use NIOLAB\oauth2\components\web\OauthHttpException;
+use NIOLAB\oauth2\models\AccessToken;
+use NIOLAB\oauth2\Module;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\HttpException;
@@ -19,7 +19,7 @@ use yii\web\HttpException;
 /**
  * Class TestController
  *
- * @package promocat\oauth2\controllers
+ * @package NIOLAB\oauth2\controllers
  *
  * @property Module module
  */

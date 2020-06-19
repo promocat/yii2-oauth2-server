@@ -1,6 +1,6 @@
 <?php
 
-namespace promocat\oauth2\models;
+namespace NIOLAB\oauth2\models;
 
 use League\OAuth2\Server\Entities\AccessTokenEntityInterface;
 use League\OAuth2\Server\Entities\RefreshTokenEntityInterface;

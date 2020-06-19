@@ -1,10 +1,11 @@
 <?php
 
-namespace promocat\oauth2\controllers;
+namespace NIOLAB\oauth2\controllers;
 
+use NIOLAB\oauth2\Module;
 use Yii;
-use promocat\oauth2\models\Client;
-use promocat\oauth2\models\ClientSearch;
+use NIOLAB\oauth2\models\Client;
+use NIOLAB\oauth2\models\ClientSearch;
 use yii\base\Security;
 use yii\helpers\StringHelper;
 use yii\web\Controller;
@@ -29,7 +30,7 @@ class ClientsController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['superadmin'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
@@ -40,6 +41,20 @@ class ClientsController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function beforeAction($action) {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        /** @var Module $module */
+        $module = \Yii::$app->getModule('oauth2');
+        if (!$module->enableClientsController) {
+            throw new NotFoundHttpException();
+        }
+
+        return true;
     }
 
     /**

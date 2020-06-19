@@ -1,12 +1,12 @@
 <?php
 
-use promocat\adminlte\widgets\grid\GridView;
+use yii\grid\GridView;
 use yii\helpers\Html;
 
 ;
 
 /* @var $this yii\web\View */
-/* @var $searchModel promocat\oauth2\models\ClientSearch */
+/* @var $searchModel NIOLAB\oauth2\models\ClientSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'oAuth2 Clients';
@@ -19,15 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <div class="col-lg-12">
-            <?php \promocat\adminlte\widgets\Box::begin(
-                [
-                    "type" => \promocat\adminlte\widgets\Box::TYPE_INFO,
-                    "header" => $this->title,
-                    "icon" => "user",
-                    "footer" => Html::a('Create oAuth2 Client', ['create'], ['class' => 'btn btn-success']),
-                ]
-            );
-            ?>
+            <?= Html::a('Create oAuth2 Client', ['create'], ['class' => 'btn btn-success']); ?>
+            <br>
 
 
             <?= GridView::widget([
@@ -42,14 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view}',
                         'buttons' => [
                             'view' => function ($url) {
-                                return Html::a(new \rmrevin\yii\fontawesome\component\Icon('search') . ' ' . 'View', $url, ['class' => 'btn btn-xs btn-primary']);
+                                return Html::a('View', $url, ['class' => 'btn btn-xs btn-primary']);
                             },
                         ],
                     ],
                 ],
             ]); ?>
-
-            <?php \promocat\adminlte\widgets\Box::end() ?>
         </div>
     </div>
 </div>
